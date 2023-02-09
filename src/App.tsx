@@ -1,11 +1,12 @@
-import React from 'react';
+import React from 'react'
+import waldo from './assets/waldo.jpg'
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
-      test
+      <img src={waldo} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
