@@ -3,12 +3,12 @@ import waldo from './waldo.jpg'
 import Start from './components/Start'
 
 const App: React.FC = () => {
-  const [play, setPlay] = useState(false)
-  const start = (): void => { setPlay(true) }
+  const [started, setStarted] = useState(false)
+  const start = (): void => { setStarted(true) }
   return (
-    <div className="App">
-      <img src={waldo} className={play ? '' : 'blur'} />
-      <Start start={start}/>
+    <div className="App" onClick={start}>
+      <img src={waldo} className={started ? '' : 'blur'} />
+      <Start isStarted={started}/>
     </div>
   )
 }

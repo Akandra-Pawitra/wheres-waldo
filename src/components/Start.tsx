@@ -1,20 +1,28 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Modal = styled.div`
-  width: 400px;
-  height: 400px;
+type PlayState = true | false
+
+const Container = styled.div<{ started: PlayState }>`
+  display: ${({ started }) => started ? 'none' : 'flex'};
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
   position: fixed;
-  top: calc((100vh / 2) - 200px);
-  bottom: calc((100vh / 2) - 200px);
-  right: calc((100vw / 2) - 200px);
-  left: calc((100vw / 2) - 200px);
-  border: 2px solid black;
+  top: 10vh;
+  bottom: 10vh;
+  right: 10vw;
+  left: 10vw;
+  font-size: 40px;
+  font-weight: bolder;
 `
 
-const Start: React.FC<{ start: any }> = ({ start }) => {
+const Start: React.FC<{ isStarted: boolean }> = ({ isStarted }) => {
   return (
-    <Modal>Modal</Modal>
+    <Container started={isStarted}>
+      <p>YOUR OBJECTIVE IS TO FIND WALDO AS FAST AS POSSIBLE</p>
+      <p>CLICK ANYWHERE TO START</p>
+    </Container>
   )
 }
 
