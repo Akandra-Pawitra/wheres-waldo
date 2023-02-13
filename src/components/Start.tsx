@@ -3,8 +3,8 @@ import styled from 'styled-components'
 
 type Bool = true | false
 
-const Container = styled.div<{ started: Bool }>`
-  display: ${({ started }) => started ? 'none' : 'flex'};
+const Container = styled.div<{ played: Bool }>`
+  display: ${({ played }) => played ? 'none' : 'flex'};
   flex-direction: column;
   justify-content: center;
   text-align: center;
@@ -15,11 +15,12 @@ const Container = styled.div<{ started: Bool }>`
   left: 10vw;
   font-size: 40px;
   font-weight: bolder;
+  background-color: rgba(200, 200, 200, 0.5);
 `
 
-const Start: React.FC<{ isStarted: boolean }> = ({ isStarted }) => {
+const Start: React.FC<{ isPlayed: boolean }> = ({ isPlayed }) => {
   return (
-    <Container started={isStarted}>
+    <Container played={isPlayed}>
       <p>YOUR OBJECTIVE IS TO FIND WALDO AS FAST AS POSSIBLE</p>
       <p>CLICK ANYWHERE TO START</p>
     </Container>

@@ -9,9 +9,9 @@ const Box = styled.div`
   top: 550px;
 `
 
-const Hitbox: React.FC<{ isFound: () => void }> = ({ isFound }) => {
+const Hitbox: React.FC<{ found: () => void }> = ({ found }) => {
   return (
-    <Box onClick={isFound}></Box>
+    <Box onClick={found}></Box>
   )
 }
 
