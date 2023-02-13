@@ -7,8 +7,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.App img {
-  width: 100vw;
+.background {
+  position: static;
+  width: 1366px;
+}
+
+.background img {
+  width: 100%;
 }
 
 .blur {

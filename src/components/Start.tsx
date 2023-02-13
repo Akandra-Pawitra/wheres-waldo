@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-type PlayState = true | false
+type Bool = true | false
 
-const Container = styled.div<{ started: PlayState }>`
+const Container = styled.div<{ started: Bool }>`
   display: ${({ started }) => started ? 'none' : 'flex'};
   flex-direction: column;
   justify-content: center;
