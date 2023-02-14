@@ -1,9 +1,25 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
 import waldo from './waldo.jpg'
 import Start from './components/Start'
 import Hitbox from './components/Hitbox'
 import GameOver from './components/GameOver'
 import { useStopwatch } from 'react-timer-hook'
+
+const convertDigit = (arg: number): string => '0' + arg.toString()
+
+const Timer = styled.div<{ isPlayed: boolean, isFounded: boolean }>`
+  display: ${({ isPlayed, isFounded }) => isPlayed && !isFounded ? 'block' : 'none'};
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(200, 200, 200, 0.5);
+  width: 160px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 40px;
+`
 
 const App: React.FC = () => {
   const [played, setPlayed] = useState(false)
@@ -22,20 +38,28 @@ const App: React.FC = () => {
   const found = (): void => {
     setFounded(true)
     pause()
-    let mm: string = minutes.toString()
-    let ss: string = seconds.toString()
-    if (mm.length === 1) mm = '0' + mm
-    if (ss.length === 1) ss = '0' + ss
-    setTime(`${mm}:${ss}`)
+    const mm: string = minutes < 10 ? '0' + minutes.toString() : minutes.toString()
+    const ss: string = seconds < 10 ? '0' + seconds.toString() : seconds.toString()
+    setTime(mm + ':' + ss)
   }
   return (
     <div className="App" onClick={played ? () => {} : play}>
       <div className='background'>
-        <img src={waldo} className={played ? '' : 'blur'} />
+        <img
+          src={waldo}
+          className={played ? '' : 'blur'}
+        />
         <Hitbox found={founded ? () => {} : found}/>
       </div>
       <Start isPlayed={played}/>
-      <div>{minutes}:{seconds}</div>
+      <Timer
+        isPlayed={played}
+        isFounded={founded}
+      >
+        {minutes < 10 ? convertDigit(minutes) : minutes}
+        :
+        {seconds < 10 ? convertDigit(seconds) : seconds}
+      </Timer>
       <GameOver isFounded={founded} time={time} />
     </div>
   )

@@ -1,9 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-type Bool = true | false
-
-const Over = styled.div<{ found: Bool }>`
+const Over = styled.div<{ found: boolean }>`
   display: ${({ found }) => found ? 'flex' : 'none'};
   flex-direction: column;
   justify-content: center;

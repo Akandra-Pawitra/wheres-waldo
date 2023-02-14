@@ -1,9 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-type Bool = true | false
-
-const Container = styled.div<{ played: Bool }>`
+const Container = styled.div<{ played: boolean }>`
   display: ${({ played }) => played ? 'none' : 'flex'};
   flex-direction: column;
   justify-content: center;
