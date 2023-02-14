@@ -29,7 +29,8 @@ const App: React.FC = () => {
     minutes,
     seconds,
     start,
-    pause
+    pause,
+    reset
   } = useStopwatch({ autoStart: false })
   const play = (): void => {
     setPlayed(true)
@@ -41,6 +42,11 @@ const App: React.FC = () => {
     const mm: string = minutes < 10 ? '0' + minutes.toString() : minutes.toString()
     const ss: string = seconds < 10 ? '0' + seconds.toString() : seconds.toString()
     setTime(mm + ':' + ss)
+  }
+  const restart = (): void => {
+    setPlayed(false)
+    setFounded(false)
+    reset()
   }
   return (
     <div className="App" onClick={played ? () => {} : play}>
@@ -60,7 +66,11 @@ const App: React.FC = () => {
         :
         {seconds < 10 ? convertDigit(seconds) : seconds}
       </Timer>
-      <GameOver isFounded={founded} time={time} />
+      <GameOver
+        isFounded={founded}
+        time={time}
+        restart={restart}
+      />
     </div>
   )
 }

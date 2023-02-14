@@ -16,11 +16,31 @@ const Over = styled.div<{ found: boolean }>`
   background-color: rgba(200, 200, 200, 0.5);
 `
 
-const GameOver: React.FC<{ isFounded: boolean, time: string }> = ({ isFounded, time }) => {
+const ActionContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+`
+
+const Action = styled.button`
+  background-color: rgb(200, 200, 200);
+  margin: auto;
+  color: black;
+  font-size: 36px;
+`
+
+const GameOver: React.FC<{
+  isFounded: boolean
+  time: string
+  restart: () => void
+}> = ({ isFounded, time, restart }) => {
   return (
     <Over found={isFounded}>
-      <p>You have found Waldo!!!</p>
+      <p>YOU HAVE FOUND WALDO!!!</p>
       <p>{time}</p>
+      <ActionContainer>
+        <Action onClick={restart}>RESTART</Action>
+        <Action>SUBMIT</Action>
+      </ActionContainer>
     </Over>
   )
 }
