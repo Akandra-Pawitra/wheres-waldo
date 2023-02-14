@@ -53,7 +53,7 @@ const App: React.FC = () => {
       <div className='background'>
         <img
           src={waldo}
-          className={played ? '' : 'blur'}
+          className={played && !founded ? '' : 'blur'}
         />
         <Hitbox found={founded ? () => {} : found}/>
       </div>
