@@ -43,7 +43,7 @@ const App: React.FC = () => {
     const ss: string = seconds < 10 ? '0' + seconds.toString() : seconds.toString()
     setTime(mm + ':' + ss)
   }
-  const restart = (): void => {
+  const resetGame = (): void => {
     setPlayed(false)
     setFounded(false)
     reset()
@@ -69,7 +69,7 @@ const App: React.FC = () => {
       <GameOver
         isFounded={founded}
         time={time}
-        restart={restart}
+        resetGame={resetGame}
       />
     </div>
   )
