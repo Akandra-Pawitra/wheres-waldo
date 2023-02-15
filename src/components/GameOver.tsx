@@ -51,7 +51,9 @@ const GameOver: React.FC<{
   isFounded: boolean
   time: string
   resetGame: () => void
-}> = ({ isFounded, time, resetGame }) => {
+  value: string
+  handleChange: (event: any) => void
+}> = ({ isFounded, time, resetGame, value, handleChange }) => {
   const [submitting, setSubmitting] = useState(false)
   const restart = (): void => {
     setSubmitting(false)
@@ -67,7 +69,11 @@ const GameOver: React.FC<{
       </p>
       <TimeContainer submit={submitting}>
         <span>{time}</span>
-        <Name type='text' submit={submitting} />
+        <Name
+          type='text'
+          value={value}
+          onChange={handleChange}
+          submit={submitting} />
       </TimeContainer>
       <ActionContainer>
         <Action onClick={restart}>RESTART</Action>
