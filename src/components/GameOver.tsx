@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import Submit from './Submit'
+import Time from './Time'
+import Title from './Title'
 
 const Over = styled.div<{ found: boolean }>`
   display: ${({ found }) => found ? 'flex' : 'none'};
@@ -17,68 +20,42 @@ const Over = styled.div<{ found: boolean }>`
   background-color: rgba(200, 200, 200, 0.5);
 `
 
-const TimeContainer = styled.div<{ submit: boolean }>`
-  ${({ submit }) => submit
-  ? 'display: grid; grid-template-columns: 1fr 1fr;'
-  : 'display: flex'};
-  justify-content: center;
-  margin-top: -10px;
-  margin-bottom: 40px;
-`
-
-const Name = styled.input<{ submit: boolean }>`
-  display: ${({ submit }) => submit ? 'flex' : 'none'};
-  width: 200px;
-  justify-self: center;
-  text-align: center;
-  font-size: 30px;
-  background-color: rgba(200, 200, 200, 0.7);
-`
-
-const ActionContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-`
-
-const Action = styled.button`
-  background-color: rgba(200, 200, 200, 0.7);
-  margin: auto;
-  color: black;
-  font-size: 30px;
-`
-
 const GameOver: React.FC<{
   isFounded: boolean
   time: string
   resetGame: () => void
-  value: string
-  handleChange: (event: any) => void
-}> = ({ isFounded, time, resetGame, value, handleChange }) => {
+}> = ({ isFounded, time, resetGame }) => {
   const [submitting, setSubmitting] = useState(false)
+  const [playerName, setPlayerName] = useState('')
+  const [rank, setRank] = useState(false)
   const restart = (): void => {
     setSubmitting(false)
     resetGame()
   }
-  const submit = (): void => { setSubmitting(true) }
+  const handleChange = (event: any): void => {
+    if (playerName.length < 8) {
+      const val = event.target.value
+      const char = val[val.length - 1]
+      if ((char.match(/^[a-z0-9]+$/i)) !== null) {
+        setPlayerName(val)
+      }
+    }
+  }
   return (
     <Over found={isFounded}>
-      <p>
-        {submitting
-          ? 'ENTER YOUR NAME'
-          : 'YOU HAVE FOUND WALDO!!!'}
-      </p>
-      <TimeContainer submit={submitting}>
-        <span>{time}</span>
-        <Name
-          type='text'
-          value={value}
-          onChange={handleChange}
-          submit={submitting} />
-      </TimeContainer>
-      <ActionContainer>
-        <Action onClick={restart}>RESTART</Action>
-        <Action onClick={submitting ? () => {} : submit}>SUBMIT</Action>
-      </ActionContainer>
+      <Title submitting={submitting} rank={rank} />
+      <Time
+        submitting={submitting}
+        rank={rank}
+        time={time}
+        playerName={playerName}
+        handleChange={handleChange} />
+      <Submit
+        rank={rank}
+        submitting={submitting}
+        restart={restart}
+        setRank={setRank}
+        setSubmitting={setSubmitting} />
     </Over>
   )
 }

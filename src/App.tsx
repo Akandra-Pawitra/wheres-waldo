@@ -25,7 +25,6 @@ const App: React.FC = () => {
   const [played, setPlayed] = useState(false)
   const [founded, setFounded] = useState(false)
   const [time, setTime] = useState('')
-  const [playerName, setPlayerName] = useState('')
   const {
     minutes,
     seconds,
@@ -49,15 +48,6 @@ const App: React.FC = () => {
     setFounded(false)
     reset()
   }
-  const handleChange = (event: any): void => {
-    if (playerName.length < 8) {
-      const val = event.target.value
-      const char = val[val.length - 1]
-      if ((char.match(/^[a-z0-9]+$/i)) !== null) {
-        setPlayerName(val)
-      }
-    }
-  }
   return (
     <div className="App" onClick={played ? () => {} : play}>
       <div className='background'>
@@ -79,9 +69,7 @@ const App: React.FC = () => {
       <GameOver
         isFounded={founded}
         time={time}
-        resetGame={resetGame}
-        value={playerName}
-        handleChange={handleChange} />
+        resetGame={resetGame} />
     </div>
   )
 }
