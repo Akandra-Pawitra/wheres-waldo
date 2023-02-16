@@ -21,7 +21,7 @@ const Timer = styled.div<{ isPlayed: boolean, isFounded: boolean }>`
   font-size: 40px;
 `
 
-const App: React.FC = () => {
+const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
   const [played, setPlayed] = useState(false)
   const [founded, setFounded] = useState(false)
   const [time, setTime] = useState('')
@@ -69,6 +69,7 @@ const App: React.FC = () => {
       <GameOver
         isFounded={founded}
         time={time}
+        leaderboard={leaderboard}
         resetGame={resetGame} />
     </div>
   )

@@ -5,7 +5,9 @@ const ActionContainer = styled.div<{ rank: boolean }>`
   ${({ rank }) => rank
     ? 'display: none;'
     : 'display: grid; grid-template-columns: 1fr 1fr;'
-}
+  }
+  position: relative;
+  top: 100px;
 `
 
 const Action = styled.button`
@@ -19,20 +21,20 @@ const Submit: React.FC<{
   rank: boolean
   submitting: boolean
   restart: () => void
-  setRank: (arg: boolean) => void
+  submitScore: () => void
   setSubmitting: (arg: boolean) => void
 }> = ({
   rank,
   submitting,
   restart,
-  setRank,
+  submitScore,
   setSubmitting
 }) => {
   return (
     <ActionContainer rank={rank}>
         <Action onClick={restart}>RESTART</Action>
         <Action onClick={submitting
-          ? () => { setRank(true) }
+          ? () => { submitScore() }
           : () => { setSubmitting(true) }}>
             SUBMIT
         </Action>

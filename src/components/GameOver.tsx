@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Submit from './Submit'
 import Time from './Time'
 import Title from './Title'
+import Leaderboard from './Leaderboard'
 
 const Over = styled.div<{ found: boolean }>`
   display: ${({ found }) => found ? 'flex' : 'none'};
@@ -24,10 +25,12 @@ const GameOver: React.FC<{
   isFounded: boolean
   time: string
   resetGame: () => void
-}> = ({ isFounded, time, resetGame }) => {
+  leaderboard: Player[]
+}> = ({ isFounded, time, resetGame, leaderboard }) => {
   const [submitting, setSubmitting] = useState(false)
   const [playerName, setPlayerName] = useState('')
   const [rank, setRank] = useState(false)
+  const [playerRank, setPlayerRank] = useState(leaderboard)
   const restart = (): void => {
     setSubmitting(false)
     resetGame()
@@ -40,6 +43,30 @@ const GameOver: React.FC<{
         setPlayerName(val)
       }
     }
+  }
+  const submitScore = (): void => {
+    const arr = playerRank
+    const playerTime = parseInt((time[0] + time[1])) * 60 + parseInt((time[3] + time[4]))
+    const player: Player = {
+      name: playerName,
+      time: playerTime,
+      score: time
+    }
+    let [isTopRank, place] = [false, 0]
+    for (let i = 0; i < 9; i++) {
+      if (player.time <= playerRank[i].time) {
+        isTopRank = true
+        player.time === playerRank[i].time
+          ? place = i + 1
+          : place = i
+        break
+      } else continue
+    }
+    if (isTopRank) {
+      arr.splice(place, 0, player)
+    } else arr.push(player)
+    setPlayerRank(arr)
+    setRank(true)
   }
   return (
     <Over found={isFounded}>
@@ -54,8 +81,11 @@ const GameOver: React.FC<{
         rank={rank}
         submitting={submitting}
         restart={restart}
-        setRank={setRank}
+        submitScore={submitScore}
         setSubmitting={setSubmitting} />
+      <Leaderboard
+        leaderboard={leaderboard}
+        rank={rank} />
     </Over>
   )
 }
