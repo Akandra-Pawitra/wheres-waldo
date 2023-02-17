@@ -4,10 +4,8 @@ import Submit from './Submit'
 import Time from './Time'
 import Title from './Title'
 import Leaderboard from './Leaderboard'
-import fireStoreApp from '../Firebase'
-import { getFirestore, collection, addDoc } from 'firebase/firestore'
-
-const db = getFirestore(fireStoreApp)
+import { addDoc, updateDoc } from 'firebase/firestore'
+import { userRef, rankRef } from '../index'
 
 const Over = styled.div<{ found: boolean }>`
   display: ${({ found }) => found ? 'flex' : 'none'};
@@ -57,12 +55,6 @@ const GameOver: React.FC<{
       score: time
     }
 
-    addDoc(collection(db, 'waldo-odinproject'), player).then(
-      () => {}
-    ).catch(error => {
-      console.log(error)
-    })
-
     let [isTopRank, place] = [false, 0]
     for (let i = 0; i < 9; i++) {
       if (player.time <= playerRank[i].time) {
@@ -76,8 +68,21 @@ const GameOver: React.FC<{
     if (isTopRank) {
       arr.splice(place, 0, player)
     } else arr.push(player)
+
     setPlayerRank(arr)
     setRank(true)
+
+    addDoc(userRef, player).then(
+      () => {}
+    ).catch(error => {
+      console.log(error)
+    })
+
+    updateDoc(rankRef, { rank: arr }).then(
+      () => {}
+    ).catch(error => {
+      console.log(error)
+    })
   }
   return (
     <Over found={isFounded}>
