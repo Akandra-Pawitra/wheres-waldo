@@ -4,6 +4,10 @@ import Submit from './Submit'
 import Time from './Time'
 import Title from './Title'
 import Leaderboard from './Leaderboard'
+import fireStoreApp from '../Firebase'
+import { getFirestore, collection, addDoc } from 'firebase/firestore'
+
+const db = getFirestore(fireStoreApp)
 
 const Over = styled.div<{ found: boolean }>`
   display: ${({ found }) => found ? 'flex' : 'none'};
@@ -52,6 +56,13 @@ const GameOver: React.FC<{
       time: playerTime,
       score: time
     }
+
+    addDoc(collection(db, 'waldo-odinproject'), player).then(
+      () => {}
+    ).catch(error => {
+      console.log(error)
+    })
+
     let [isTopRank, place] = [false, 0]
     for (let i = 0; i < 9; i++) {
       if (player.time <= playerRank[i].time) {
