@@ -1,26 +1,11 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
-import waldo from './waldo.jpg'
 import Start from './components/Start'
-import Hitbox from './components/Hitbox'
 import GameOver from './components/GameOver'
 import { useStopwatch } from 'react-timer-hook'
+import Background from './components/Background'
+import Timer from './components/Timer'
 
 const noop = (): void => {}
-const convertDigit = (arg: number): string => '0' + arg.toString()
-
-const Timer = styled.div<{ isPlayed: boolean, isFounded: boolean }>`
-  display: ${({ isPlayed, isFounded }) => isPlayed && !isFounded ? 'block' : 'none'};
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(200, 200, 200, 0.5);
-  width: 160px;
-  height: 50px;
-  text-align: center;
-  line-height: 50px;
-  font-size: 40px;
-`
 
 const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
   const [played, setPlayed] = useState(false)
@@ -51,22 +36,16 @@ const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
   }
   return (
     <div className="App" onClick={played ? noop : play}>
-      <div className='background'>
-        <img
-          src={waldo}
-          className={played && !founded ? '' : 'blur'}
-        />
-        <Hitbox found={founded ? noop : found}/>
-      </div>
+      <Background
+        played={played}
+        founded={founded}
+        found={found} />
       <Start isPlayed={played}/>
       <Timer
-        isPlayed={played}
-        isFounded={founded}
-      >
-        {minutes < 10 ? convertDigit(minutes) : minutes}
-        :
-        {seconds < 10 ? convertDigit(seconds) : seconds}
-      </Timer>
+        played={played}
+        founded={founded}
+        minutes={minutes}
+        seconds={seconds} />
       <GameOver
         isFounded={founded}
         time={time}
