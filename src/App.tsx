@@ -6,6 +6,7 @@ import Hitbox from './components/Hitbox'
 import GameOver from './components/GameOver'
 import { useStopwatch } from 'react-timer-hook'
 
+const noop = (): void => {}
 const convertDigit = (arg: number): string => '0' + arg.toString()
 
 const Timer = styled.div<{ isPlayed: boolean, isFounded: boolean }>`
@@ -49,13 +50,13 @@ const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
     reset()
   }
   return (
-    <div className="App" onClick={played ? () => {} : play}>
+    <div className="App" onClick={played ? noop : play}>
       <div className='background'>
         <img
           src={waldo}
           className={played && !founded ? '' : 'blur'}
         />
-        <Hitbox found={founded ? () => {} : found}/>
+        <Hitbox found={founded ? noop : found}/>
       </div>
       <Start isPlayed={played}/>
       <Timer

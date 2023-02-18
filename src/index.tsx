@@ -15,23 +15,26 @@ export const userRef = collection(db, 'UserScore')
 export const rankRef = doc(db, 'UserRank', 'Leaderboard')
 
 const snap = await getDoc(rankRef)
+const rankPlaceholder = [
+  { name: 'computer', time: 600, score: '10:00' },
+  { name: 'computer', time: 600, score: '10:00' },
+  { name: 'computer', time: 600, score: '10:00' },
+  { name: 'computer', time: 600, score: '10:00' },
+  { name: 'computer', time: 600, score: '10:00' },
+  { name: 'computer', time: 600, score: '10:00' },
+  { name: 'computer', time: 600, score: '10:00' },
+  { name: 'computer', time: 600, score: '10:00' },
+  { name: 'computer', time: 600, score: '10:00' }
+]
 
 let leaderboard: Player[] = []
 if (snap.exists()) {
   const obj = snap.data()
-  leaderboard = obj.rank
+  obj.rank.length === 0
+    ? leaderboard = rankPlaceholder
+    : leaderboard = obj.rank
 } else {
-  leaderboard = [
-    { name: 'computer', time: 600, score: '10:00' },
-    { name: 'computer', time: 600, score: '10:00' },
-    { name: 'computer', time: 600, score: '10:00' },
-    { name: 'computer', time: 600, score: '10:00' },
-    { name: 'computer', time: 600, score: '10:00' },
-    { name: 'computer', time: 600, score: '10:00' },
-    { name: 'computer', time: 600, score: '10:00' },
-    { name: 'computer', time: 600, score: '10:00' },
-    { name: 'computer', time: 600, score: '10:00' }
-  ]
+  leaderboard = rankPlaceholder
 }
 
 const root = ReactDOM.createRoot(

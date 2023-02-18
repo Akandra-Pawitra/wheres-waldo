@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Submit from './Submit'
-import Time from './Time'
+import Score from './Score'
 import Title from './Title'
 import Leaderboard from './Leaderboard'
 import { addDoc, updateDoc } from 'firebase/firestore'
@@ -38,13 +38,7 @@ const GameOver: React.FC<{
     resetGame()
   }
   const handleChange = (event: any): void => {
-    if (playerName.length < 8) {
-      const val = event.target.value
-      const char = val[val.length - 1]
-      if ((char.match(/^[a-z0-9]+$/i)) !== null) {
-        setPlayerName(val)
-      }
-    }
+    setPlayerName(event.target.value)
   }
   const submitScore = (): void => {
     const arr = playerRank
@@ -87,7 +81,7 @@ const GameOver: React.FC<{
   return (
     <Over found={isFounded}>
       <Title submitting={submitting} rank={rank} />
-      <Time
+      <Score
         submitting={submitting}
         rank={rank}
         time={time}
@@ -96,6 +90,7 @@ const GameOver: React.FC<{
       <Submit
         rank={rank}
         submitting={submitting}
+        playerName={playerName}
         restart={restart}
         submitScore={submitScore}
         setSubmitting={setSubmitting} />

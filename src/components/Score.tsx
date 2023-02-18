@@ -19,7 +19,7 @@ const Name = styled.input<{ submit: boolean }>`
   background-color: rgba(200, 200, 200, 0.7);
 `
 
-const Time: React.FC<{
+const Score: React.FC<{
   submitting: boolean
   rank: boolean
   time: string
@@ -38,4 +38,4 @@ const Time: React.FC<{
   )
 }
 
-export default Time
+export default Score

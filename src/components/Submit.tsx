@@ -20,22 +20,32 @@ const Action = styled.button`
 const Submit: React.FC<{
   rank: boolean
   submitting: boolean
+  playerName: string
   restart: () => void
   submitScore: () => void
   setSubmitting: (arg: boolean) => void
 }> = ({
   rank,
   submitting,
+  playerName,
   restart,
   submitScore,
   setSubmitting
 }) => {
+  const validateUserName = (): void => {
+    if (
+      playerName.length === 8 &&
+      playerName.match(/^[A-Za-z0-9]+$/) !== null) {
+      submitScore()
+    } else {
+      alert('Username must be Alphanumeric and 8 character long')
+    }
+  }
+  const showNameInput = (): void => { setSubmitting(true) }
   return (
     <ActionContainer rank={rank}>
         <Action onClick={restart}>RESTART</Action>
-        <Action onClick={submitting
-          ? () => { submitScore() }
-          : () => { setSubmitting(true) }}>
+        <Action onClick={submitting ? validateUserName : showNameInput} >
             SUBMIT
         </Action>
       </ActionContainer>
