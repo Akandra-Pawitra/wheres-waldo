@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import waldo from '../waldo.jpg'
+import background from '../assets/background.jpg'
 import Hitbox from './Hitbox'
 
 const noop = (): void => {}
@@ -8,7 +8,13 @@ const noop = (): void => {}
 const Container = styled.div`
   position: static;
   width: 1366px;
-  height: 900px;
+`
+
+const Image = styled.img<{ played: boolean, founded: boolean }>`
+  width: 1366px;
+  filter: ${({ played, founded }) => {
+    return (played && !founded ? 'none' : 'blur(16px)')
+  }};
 `
 
 const Background: React.FC<{
@@ -18,12 +24,7 @@ const Background: React.FC<{
 }> = ({ played, founded, found }) => {
   return (
     <Container>
-      <img
-        src={waldo}
-        width='1366px'
-        height='900px'
-        className={played && !founded ? '' : 'blur'}
-      />
+      <Image src={background} played={played} founded={founded} />
       <Hitbox found={founded ? noop : found}/>
     </Container>
   )

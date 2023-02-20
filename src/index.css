@@ -6,16 +6,3 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-.background {
-  position: static;
-  width: 1366px;
-}
-
-.background img {
-  width: 100%;
-}
-
-.blur {
-  filter: blur(10px);
-}
