@@ -4,13 +4,15 @@ import GameOver from './components/GameOver'
 import { useStopwatch } from 'react-timer-hook'
 import Background from './components/Background'
 import Timer from './components/Timer'
-
-const noop = (): void => {}
+import Selection from './components/Selection'
 
 const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
   const [played, setPlayed] = useState(false)
+  const [selecting, setSelecting] = useState(false)
   const [founded, setFounded] = useState(false)
   const [time, setTime] = useState('')
+  const [x, setX] = useState(0)
+  const [y, setY] = useState(0)
   const {
     minutes,
     seconds,
@@ -18,9 +20,20 @@ const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
     pause,
     reset
   } = useStopwatch({ autoStart: false })
-  const play = (): void => {
-    setPlayed(true)
-    start()
+  const play = (e: React.MouseEvent): void => {
+    if (!founded) {
+      // don't use (played && !selecting), it will trigger start()
+      if (played) {
+        if (!selecting) {
+          setX(e.clientX + window.scrollX)
+          setY(e.clientY + window.scrollY)
+          setSelecting(true)
+        }
+      } else {
+        setPlayed(true)
+        start()
+      }
+    }
   }
   const found = (): void => {
     setFounded(true)
@@ -35,12 +48,18 @@ const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
     reset()
   }
   return (
-    <div className="App" onClick={played ? noop : play}>
+    <div className="App" onMouseDown={play}>
       <Background
         played={played}
         founded={founded}
         found={found} />
       <Start isPlayed={played}/>
+      <Selection
+        played={played}
+        selecting={selecting}
+        founded={founded}
+        setSelecting={setSelecting}
+        x={x} y={y} />
       <Timer
         played={played}
         founded={founded}
