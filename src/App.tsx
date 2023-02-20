@@ -5,6 +5,7 @@ import { useStopwatch } from 'react-timer-hook'
 import Background from './components/Background'
 import Timer from './components/Timer'
 import Selection from './components/Selection'
+import StatusBar from './components/StatusBar'
 
 const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
   const [played, setPlayed] = useState(false)
@@ -36,6 +37,7 @@ const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
     }
   }
   const found = (): void => {
+    setPlayed(false)
     setFounded(true)
     pause()
     const mm: string = minutes < 10 ? '0' + minutes.toString() : minutes.toString()
@@ -49,20 +51,21 @@ const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
   }
   return (
     <div className="App" onMouseDown={play}>
+      <StatusBar isPlayed={played} />
       <Background
-        played={played}
+        isPlayed={played}
         founded={founded}
         found={found} />
       <Start isPlayed={played}/>
       <Selection
-        played={played}
-        selecting={selecting}
-        founded={founded}
+        isPlayed={played}
+        isSelecting={selecting}
+        isFounded={founded}
         setSelecting={setSelecting}
         x={x} y={y} />
       <Timer
-        played={played}
-        founded={founded}
+        isPlayed={played}
+        isFounded={founded}
         minutes={minutes}
         seconds={seconds} />
       <GameOver

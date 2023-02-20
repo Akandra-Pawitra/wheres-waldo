@@ -10,21 +10,24 @@ const Container = styled.div`
   width: 1366px;
 `
 
-const Image = styled.img<{ played: boolean, founded: boolean }>`
+const Nav = styled.div`
+  height: 100px;
+`
+
+const Image = styled.img<{ isPlayed: boolean }>`
   width: 1366px;
-  filter: ${({ played, founded }) => {
-    return (played && !founded ? 'none' : 'blur(16px)')
-  }};
+  filter: ${({ isPlayed }) => isPlayed ? 'none' : 'blur(16px)'};
 `
 
 const Background: React.FC<{
-  played: boolean
+  isPlayed: boolean
   founded: boolean
   found: () => void
-}> = ({ played, founded, found }) => {
+}> = ({ isPlayed, founded, found }) => {
   return (
     <Container>
-      <Image src={background} played={played} founded={founded} />
+      <Nav />
+      <Image src={background} isPlayed={isPlayed} />
       <Hitbox found={founded ? noop : found}/>
     </Container>
   )

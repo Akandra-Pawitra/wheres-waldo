@@ -2,14 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Modal = styled.div<{
-  played: boolean
-  selecting: boolean
-  founded: boolean
+  isPlayed: boolean
+  isSelecting: boolean
+  isFounded: boolean
   x: number
   y: number
 }>`
-  display: ${({ played, selecting, founded }) => {
-    return (played && selecting) && !founded ? 'block' : 'none'
+  display: ${({ isPlayed, isSelecting, isFounded }) => {
+    return (isPlayed && isSelecting) && !isFounded ? 'block' : 'none'
   }};
   position: absolute;
   top: ${({ y }) => y}px;
@@ -17,22 +17,22 @@ const Modal = styled.div<{
 `
 
 const Selection: React.FC<{
-  played: boolean
-  selecting: boolean
-  founded: boolean
+  isPlayed: boolean
+  isSelecting: boolean
+  isFounded: boolean
   setSelecting: (arg: boolean) => void
   x: number
   y: number
-}> = ({ played, selecting, founded, setSelecting, x, y }) => {
+}> = ({ isPlayed, isSelecting, isFounded, setSelecting, x, y }) => {
   const confirmSelection = (): void => {
     // validate selection here
     setSelecting(false)
   }
   return (
     <Modal
-      played={played}
-      selecting={selecting}
-      founded={founded}
+      isPlayed={isPlayed}
+      isSelecting={isSelecting}
+      isFounded={isFounded}
       onClick={confirmSelection}
       x={x} y={y} >
       <p>SELECT</p>
