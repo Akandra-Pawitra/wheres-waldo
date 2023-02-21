@@ -1,26 +1,43 @@
 import React from 'react'
 import styled from 'styled-components'
+import Background from './Background'
+import StatusBar from './StatusBar'
 
-const Container = styled.div<{ played: boolean }>`
+const Container = styled.div`
+  position: static;
+`
+
+const ClickStart = styled.div<{ played: boolean }>`
   display: ${({ played }) => played ? 'none' : 'flex'};
   flex-direction: column;
   justify-content: center;
   text-align: center;
   position: fixed;
-  top: 10vh;
-  bottom: 10vh;
-  right: 10vw;
-  left: 10vw;
+  top: 60px;
+  bottom: 0;
+  right: 0;
+  left: 0;
   font-size: 40px;
   font-weight: bolder;
   background-color: rgba(200, 200, 200, 0.5);
+  z-index: 1;
 `
 
-const Start: React.FC<{ isPlayed: boolean }> = ({ isPlayed }) => {
+const Start: React.FC<{
+  isPlayed: boolean
+  isFounded: boolean
+  found: () => void
+}> = ({ isPlayed, isFounded, found }) => {
   return (
-    <Container played={isPlayed}>
-      <p>YOUR OBJECTIVE IS TO FIND WALDO AS FAST AS POSSIBLE</p>
-      <p>CLICK ANYWHERE TO START</p>
+    <Container>
+      <StatusBar isFounded={isFounded} />
+      <ClickStart played={isPlayed}>
+        <p>CLICK ANYWHERE TO START</p>
+      </ClickStart>
+      <Background
+        isPlayed={isPlayed}
+        isFounded={isFounded}
+        found={found} />
     </Container>
   )
 }

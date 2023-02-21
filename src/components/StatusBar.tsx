@@ -4,24 +4,26 @@ import contender from '../assets/contender.jpg'
 import fiveseven from '../assets/fiveseven.jpg'
 import welrodmk2 from '../assets/welrodmk2.jpg'
 
-const StatusBarContainer = styled.div<{ isPlayed: boolean }>`
-  filter: ${({ isPlayed }) => isPlayed ? 'none' : 'blur(16px)'};
+const StatusBarContainer = styled.div<{ isFounded: boolean }>`
+  display: ${({ isFounded }) => isFounded ? 'none' : 'block'};
   position: fixed;
   top: 0;
   left: 0;
-  height: 100px;
+  height: 60px;
+  width: 100%;
   z-index: 1;
+  background-color: black;
 `
 
 const Image = styled.img`
-  width: 75px;
+  width: 50px;
 `
 
 const StatusBar: React.FC<{
-  isPlayed: boolean
-}> = ({ isPlayed }) => {
+  isFounded: boolean
+}> = ({ isFounded }) => {
   return (
-    <StatusBarContainer isPlayed={isPlayed}>
+    <StatusBarContainer isFounded={isFounded}>
       <Image src={contender} />
       <Image src={fiveseven} />
       <Image src={welrodmk2} />

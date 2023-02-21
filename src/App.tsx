@@ -2,10 +2,8 @@ import React, { useState } from 'react'
 import Start from './components/Start'
 import GameOver from './components/GameOver'
 import { useStopwatch } from 'react-timer-hook'
-import Background from './components/Background'
 import Timer from './components/Timer'
 import Selection from './components/Selection'
-import StatusBar from './components/StatusBar'
 
 const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
   const [played, setPlayed] = useState(false)
@@ -51,12 +49,10 @@ const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
   }
   return (
     <div className="App" onMouseDown={play}>
-      <StatusBar isPlayed={played} />
-      <Background
+      <Start
         isPlayed={played}
-        founded={founded}
+        isFounded={founded}
         found={found} />
-      <Start isPlayed={played}/>
       <Selection
         isPlayed={played}
         isSelecting={selecting}

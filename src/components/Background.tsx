@@ -6,12 +6,9 @@ import Hitbox from './Hitbox'
 const noop = (): void => {}
 
 const Container = styled.div`
-  position: static;
+  position: relative;
+  top: 60px;
   width: 1366px;
-`
-
-const Nav = styled.div`
-  height: 100px;
 `
 
 const Image = styled.img<{ isPlayed: boolean }>`
@@ -21,14 +18,13 @@ const Image = styled.img<{ isPlayed: boolean }>`
 
 const Background: React.FC<{
   isPlayed: boolean
-  founded: boolean
+  isFounded: boolean
   found: () => void
-}> = ({ isPlayed, founded, found }) => {
+}> = ({ isPlayed, isFounded, found }) => {
   return (
     <Container>
-      <Nav />
       <Image src={background} isPlayed={isPlayed} />
-      <Hitbox found={founded ? noop : found}/>
+      <Hitbox found={isFounded ? noop : found}/>
     </Container>
   )
 }
