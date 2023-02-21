@@ -8,6 +8,9 @@ import Selection from './components/Selection'
 const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
   const [played, setPlayed] = useState(false)
   const [selecting, setSelecting] = useState(false)
+  const [foundContender, setFoundContender] = useState(false)
+  const [foundFiveSeven, setFoundFiveSeven] = useState(false)
+  const [foundWelrodMk2, setFoundWelrodMk2] = useState(false)
   const [founded, setFounded] = useState(false)
   const [time, setTime] = useState('')
   const [x, setX] = useState(0)
@@ -45,6 +48,9 @@ const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
   const resetGame = (): void => {
     setPlayed(false)
     setFounded(false)
+    setFoundContender(false)
+    setFoundFiveSeven(false)
+    setFoundWelrodMk2(false)
     reset()
   }
   return (
@@ -57,6 +63,13 @@ const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
         isPlayed={played}
         isSelecting={selecting}
         isFounded={founded}
+        isFoundContender={foundContender}
+        isFoundFiveSeven={foundFiveSeven}
+        isFoundWelrodMk2={foundWelrodMk2}
+        found={found}
+        setFoundContender={setFoundContender}
+        setFoundFiveSeven={setFoundFiveSeven}
+        setFoundWelrodMk2={setFoundWelrodMk2}
         setSelecting={setSelecting}
         x={x} y={y} />
       <Timer

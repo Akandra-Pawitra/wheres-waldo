@@ -5,9 +5,9 @@ import Hitbox from './Hitbox'
 
 const noop = (): void => {}
 
-const Container = styled.div`
+const Container = styled.div<{ isFounded: boolean }>`
   position: relative;
-  top: 60px;
+  top: ${({ isFounded }) => isFounded ? 0 : '60px'};
   width: 1366px;
 `
 
@@ -22,7 +22,7 @@ const Background: React.FC<{
   found: () => void
 }> = ({ isPlayed, isFounded, found }) => {
   return (
-    <Container>
+    <Container isFounded={isFounded}>
       <Image src={background} isPlayed={isPlayed} />
       <Hitbox found={isFounded ? noop : found}/>
     </Container>

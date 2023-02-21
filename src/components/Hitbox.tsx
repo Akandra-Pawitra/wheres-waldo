@@ -3,16 +3,14 @@ import styled from 'styled-components'
 
 const Contender = styled.div`
   position: absolute;
-  border: 1px solid red;
   left: 520px;
   top: 480px;
-  height: 160px;
   width: 110px;
+  height: 160px;
 `
 
 const FiveSeven = styled.div`
   position: absolute;
-  border: 1px solid red;
   left: 910px;
   top: 200px;
   width: 50px;
@@ -21,7 +19,6 @@ const FiveSeven = styled.div`
 
 const Welrodmk2 = styled.div`
   position: absolute;
-  border: 1px solid red;
   left: 510px;
   top: 80px;
   width: 30px;

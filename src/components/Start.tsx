@@ -7,8 +7,8 @@ const Container = styled.div`
   position: static;
 `
 
-const ClickStart = styled.div<{ played: boolean }>`
-  display: ${({ played }) => played ? 'none' : 'flex'};
+const ClickStart = styled.div<{ isPlayed: boolean, isFounded: boolean }>`
+  display: ${({ isPlayed, isFounded }) => isPlayed || isFounded ? 'none' : 'flex'};
   flex-direction: column;
   justify-content: center;
   text-align: center;
@@ -31,7 +31,7 @@ const Start: React.FC<{
   return (
     <Container>
       <StatusBar isFounded={isFounded} />
-      <ClickStart played={isPlayed}>
+      <ClickStart isPlayed={isPlayed} isFounded={isFounded}>
         <p>CLICK ANYWHERE TO START</p>
       </ClickStart>
       <Background
