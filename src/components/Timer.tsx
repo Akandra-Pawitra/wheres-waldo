@@ -3,12 +3,11 @@ import styled from 'styled-components'
 
 const convertDigit = (arg: number): string => '0' + arg.toString()
 
-const DisplayTime = styled.div<{ isPlayed: boolean, isFounded: boolean }>`
-  display: ${({ isPlayed, isFounded }) => isPlayed && !isFounded ? 'block' : 'none'};
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(200, 200, 200, 0.5);
+const DisplayTime = styled.div<{ isFounded: boolean }>`
+  display: ${({ isFounded }) => isFounded ? 'none' : 'block'};
+  color: rgb(200, 200, 200);
+  position: absolute;
+  right: 200px;
   width: 160px;
   height: 50px;
   text-align: center;
@@ -24,7 +23,6 @@ const Timer: React.FC<{
 }> = ({ isPlayed, isFounded, minutes, seconds }) => {
   return (
     <DisplayTime
-      isPlayed={isPlayed}
       isFounded={isFounded} >
       {minutes < 10 ? convertDigit(minutes) : minutes}
       :

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Start from './components/Start'
 import GameOver from './components/GameOver'
 import { useStopwatch } from 'react-timer-hook'
-import Timer from './components/Timer'
 import Selection from './components/Selection'
 
 const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
@@ -58,6 +57,11 @@ const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
       <Start
         isPlayed={played}
         isFounded={founded}
+        isFoundContender={foundContender}
+        isFoundFiveSeven={foundFiveSeven}
+        isFoundWelrodMk2={foundWelrodMk2}
+        minutes={minutes}
+        seconds={seconds}
         found={found} />
       <Selection
         isPlayed={played}
@@ -72,11 +76,6 @@ const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
         setFoundWelrodMk2={setFoundWelrodMk2}
         setSelecting={setSelecting}
         x={x} y={y} />
-      <Timer
-        isPlayed={played}
-        isFounded={founded}
-        minutes={minutes}
-        seconds={seconds} />
       <GameOver
         isFounded={founded}
         time={time}
