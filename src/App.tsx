@@ -22,19 +22,15 @@ const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
     reset
   } = useStopwatch({ autoStart: false })
   const play = (e: React.MouseEvent): void => {
-    if (!founded) {
-      // don't use (played && !selecting), it will trigger start()
-      if (played) {
-        if (!selecting) {
-          setX(e.clientX + window.scrollX)
-          setY(e.clientY + window.scrollY)
-          setSelecting(true)
-        }
-      } else {
-        setPlayed(true)
-        start()
-      }
+    if (!selecting) {
+      setX(e.clientX + window.scrollX)
+      setY(e.clientY + window.scrollY)
+      setSelecting(true)
     }
+  }
+  const startGame = (): void => {
+    setPlayed(true)
+    start()
   }
   const found = (): void => {
     setPlayed(false)
@@ -53,7 +49,7 @@ const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
     reset()
   }
   return (
-    <div className="App" onMouseDown={play}>
+    <div className="App">
       <Start
         isPlayed={played}
         isFounded={founded}
@@ -62,7 +58,9 @@ const App: React.FC<{ leaderboard: Player[] }> = ({ leaderboard }) => {
         isFoundWelrodMk2={foundWelrodMk2}
         minutes={minutes}
         seconds={seconds}
-        found={found} />
+        startGame={startGame}
+        found={found}
+        play={play} />
       <Selection
         isPlayed={played}
         isSelecting={selecting}

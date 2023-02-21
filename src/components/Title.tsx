@@ -13,7 +13,7 @@ const Title: React.FC<{
     <TitleText>
       {submitting
         ? (rank ? 'LEADERBOARD' : 'ENTER YOUR NAME')
-        : 'YOU HAVE FOUND WALDO!!!'}
+        : 'YOUR SCORE:'}
     </TitleText>
   )
 }

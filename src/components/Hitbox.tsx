@@ -25,12 +25,12 @@ const Welrodmk2 = styled.div`
   height: 90px;
 `
 
-const Hitbox: React.FC<{ found: () => void }> = ({ found }) => {
+const Hitbox: React.FC<{ play: (e: React.MouseEvent) => void }> = ({ play }) => {
   return (
     <div>
-      <Contender onClick={found}></Contender>
-      <FiveSeven onClick={found}></FiveSeven>
-      <Welrodmk2 onClick={found}></Welrodmk2>
+      <Contender onClick={play}></Contender>
+      <FiveSeven onClick={play}></FiveSeven>
+      <Welrodmk2 onClick={play}></Welrodmk2>
     </div>
   )
 }

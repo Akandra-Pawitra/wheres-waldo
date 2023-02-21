@@ -67,7 +67,9 @@ const Start: React.FC<{
   isFoundWelrodMk2: boolean
   minutes: number
   seconds: number
+  startGame: () => void
   found: () => void
+  play: (e: React.MouseEvent) => void
 }> = ({
   isPlayed,
   isFounded,
@@ -76,7 +78,9 @@ const Start: React.FC<{
   isFoundWelrodMk2,
   minutes,
   seconds,
-  found
+  startGame,
+  found,
+  play
 }) => {
   return (
     <Container>
@@ -88,14 +92,18 @@ const Start: React.FC<{
         isFoundWelrodMk2={isFoundWelrodMk2}
         minutes={minutes}
         seconds={seconds} />
-      <ClickStart isPlayed={isPlayed} isFounded={isFounded}>
+      <ClickStart
+        isPlayed={isPlayed}
+        isFounded={isFounded}
+        onClick={startGame}>
         <p>CLICK ANYWHERE TO START</p>
         <Profile />
       </ClickStart>
       <Background
         isPlayed={isPlayed}
         isFounded={isFounded}
-        found={found} />
+        found={found}
+        play={play} />
     </Container>
   )
 }

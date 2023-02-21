@@ -3,8 +3,6 @@ import styled from 'styled-components'
 import background from '../assets/background.jpg'
 import Hitbox from './Hitbox'
 
-const noop = (): void => {}
-
 const Container = styled.div<{ isFounded: boolean }>`
   position: relative;
   top: ${({ isFounded }) => isFounded ? 0 : '60px'};
@@ -20,11 +18,12 @@ const Background: React.FC<{
   isPlayed: boolean
   isFounded: boolean
   found: () => void
-}> = ({ isPlayed, isFounded, found }) => {
+  play: (e: React.MouseEvent) => void
+}> = ({ isPlayed, isFounded, found, play }) => {
   return (
     <Container isFounded={isFounded}>
-      <Image src={background} isPlayed={isPlayed} />
-      <Hitbox found={isFounded ? noop : found}/>
+      <Image src={background} isPlayed={isPlayed} onClick={play} />
+      <Hitbox play={play}/>
     </Container>
   )
 }
