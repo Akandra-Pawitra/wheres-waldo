@@ -10,6 +10,9 @@ import {
   doc
 } from 'firebase/firestore'
 
+// Image source
+// https://www.pixiv.net/en/artworks/82842393
+
 const db = getFirestore(fireStoreApp)
 export const userRef = collection(db, 'UserScore')
 export const rankRef = doc(db, 'UserRank', 'Leaderboard')
