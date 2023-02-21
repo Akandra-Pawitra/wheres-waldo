@@ -1,17 +1,40 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Box = styled.div`
-  height: 25px;
-  width: 25px;
+const Contender = styled.div`
   position: absolute;
-  left: 540px;
-  top: 550px;
+  border: 1px solid red;
+  left: 520px;
+  top: 480px;
+  height: 160px;
+  width: 110px;
+`
+
+const FiveSeven = styled.div`
+  position: absolute;
+  border: 1px solid red;
+  left: 910px;
+  top: 200px;
+  width: 50px;
+  height: 160px;
+`
+
+const Welrodmk2 = styled.div`
+  position: absolute;
+  border: 1px solid red;
+  left: 510px;
+  top: 80px;
+  width: 30px;
+  height: 90px;
 `
 
 const Hitbox: React.FC<{ found: () => void }> = ({ found }) => {
   return (
-    <Box onClick={found}></Box>
+    <div>
+      <Contender onClick={found}></Contender>
+      <FiveSeven onClick={found}></FiveSeven>
+      <Welrodmk2 onClick={found}></Welrodmk2>
+    </div>
   )
 }
 

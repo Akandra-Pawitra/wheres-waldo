@@ -14,6 +14,7 @@ const Modal = styled.div<{
   position: absolute;
   top: ${({ y }) => y}px;
   left: ${({ x }) => x}px;
+  color: white;
 `
 
 const Selection: React.FC<{
@@ -35,7 +36,7 @@ const Selection: React.FC<{
       isFounded={isFounded}
       onClick={confirmSelection}
       x={x} y={y} >
-      <p>SELECT</p>
+      <p>{x}, {y}</p>
     </Modal>
   )
 }
